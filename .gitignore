@@ -1,0 +1,13 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.prof
+*.test
+*.swo
+.vscode/
+vendor/
+Desktop.ini
+coverage.txt
+.env
