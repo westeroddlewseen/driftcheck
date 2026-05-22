@@ -45,6 +45,12 @@ class Pipeline:
 
     # ------------------------------------------------------------------
     def run(self) -> List[PipelineResult]:
+        """Run drift detection for all configured services.
+
+        Returns a list of PipelineResult, one per config path. If a single
+        service fails, a PipelineError is raised and the remaining services
+        are not processed.
+        """
         results: List[PipelineResult] = []
         for config_path in self._cfg.config_paths:
             result = self._run_one(config_path)
@@ -53,6 +59,18 @@ class Pipeline:
 
     # ------------------------------------------------------------------
     def _run_one(self, config_path: str) -> PipelineResult:
+        """Run drift detection for a single service config file.
+
+        Args:
+            config_path: Path to the service config file inside the repo.
+
+        Returns:
+            A PipelineResult containing the service name, drift result, and
+            rendered report string.
+
+        Raises:
+            PipelineError: If any stage of the pipeline fails.
+        """
         try:
             raw = self._git.read_file(config_path)
         except GitReaderError as exc:
