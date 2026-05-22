@@ -1,0 +1,19 @@
+# driftcheck scheduler configuration
+# -----------------------------------
+# interval_seconds: how often (in seconds) to run a full drift check.
+#   Default: 300 (5 minutes)
+#
+# max_runs: maximum number of drift-check cycles before the scheduler exits.
+#   Set to null to run indefinitely.
+#   Default: null
+#
+# on_error: behaviour when a drift-check task raises an exception.
+#   "log"   — record the error and continue (default, recommended for daemons)
+#   "raise" — propagate the exception and halt the scheduler
+#
+# Example: run every 10 minutes, stop after 100 cycles, log errors.
+
+scheduler:
+  interval_seconds: 600
+  max_runs: null
+  on_error: log
