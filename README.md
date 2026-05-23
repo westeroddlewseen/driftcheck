@@ -43,6 +43,12 @@ Run against multiple services using a config file:
 driftcheck --config driftcheck.yml --env staging
 ```
 
+Exit with a non-zero status code when drift is detected (useful in CI pipelines):
+
+```bash
+driftcheck --config driftcheck.yml --env production --fail-on-drift
+```
+
 Check the [docs](./docs) for full configuration options and CI integration examples.
 
 ---
