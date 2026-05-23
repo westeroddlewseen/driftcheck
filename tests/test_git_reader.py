@@ -13,6 +13,7 @@ REPO_PATH = "/fake/repo"
 
 
 def _make_completed(returncode: int, stdout: str = "", stderr: str = ""):
+    """Create a mock CompletedProcess-like object for subprocess.run."""
     result = MagicMock()
     result.returncode = returncode
     result.stdout = stdout
@@ -67,6 +68,19 @@ def test_list_files_returns_paths(mock_run):
     reader = GitReader(REPO_PATH)
     files = reader.list_files()
     assert files == ["config/app.yaml", "config/db.yaml"]
+
+
+@patch("subprocess.run")
+def test_list_files_with_prefix(mock_run):
+    """Test that list_files correctly filters by a path prefix."""
+    file_list = "config/app.yaml\nconfig/db.yaml\n"
+    mock_run.side_effect = [
+        _make_completed(0, stdout=".git"),
+        _make_completed(0, stdout=file_list),
+    ]
+    reader = GitReader(REPO_PATH)
+    files = reader.list_files(prefix="config/")
+    assert all(f.startswith("config/") for f in files)
 
 
 @patch("subprocess.run")
