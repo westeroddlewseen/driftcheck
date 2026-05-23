@@ -1,0 +1,16 @@
+# Remediation advisor configuration
+remediation:
+  # Fields for which automatic kubectl commands can be suggested
+  tracked_fields:
+    - image
+    - replicas
+    - env
+
+  # If true, include a dry-run flag in generated kubectl commands
+  dry_run: false
+
+  # Output format for remediation report: text | json
+  output_format: text
+
+  # If true, write the report to the audit log as well
+  audit_on_advise: false
