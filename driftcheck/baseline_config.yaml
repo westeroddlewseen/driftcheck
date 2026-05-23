@@ -1,0 +1,20 @@
+# Baseline configuration for driftcheck
+# Controls where baselines are stored and which fields are tracked.
+
+baseline:
+  # Directory (relative to CWD or absolute) where baseline JSON files are saved.
+  dir: .driftcheck/baselines
+
+  # Fields compared when diffing a live snapshot against the baseline.
+  # Supported values: image, replicas, env
+  compare_fields:
+    - image
+    - replicas
+    - env
+
+  # When true, saving a new baseline automatically archives the previous one
+  # under <dir>/archive/<service>/<timestamp>.json
+  archive_on_save: false
+
+  # Maximum number of archived baselines to keep per service (0 = unlimited).
+  max_archives: 5
