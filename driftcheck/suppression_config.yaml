@@ -1,0 +1,19 @@
+# Drift suppression rules
+# Each rule silences specific drift findings so they do not trigger alerts.
+#
+# Fields:
+#   service : glob pattern matched against the service name
+#   fields  : list of drift fields to suppress (omit to suppress all fields)
+#   reason  : optional human-readable explanation
+
+suppression:
+  rules:
+    # Example: ignore image drift for canary deployments
+    # - service: "*-canary"
+    #   fields:
+    #     - image
+    #   reason: "Canary services intentionally run newer images."
+
+    # Example: suppress all drift for the sandbox namespace
+    # - service: "sandbox-*"
+    #   reason: "Sandbox is not subject to drift policy."
