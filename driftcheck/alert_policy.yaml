@@ -1,0 +1,16 @@
+# Default alert policy configuration for driftcheck.
+# Adjust these values to control when notifications are fired.
+
+# Minimum number of drifted services before an alert is sent.
+min_drifted_services: 1
+
+# List of service names that should never trigger alerts.
+# Example:
+#   ignored_services:
+#     - canary-frontend
+#     - staging-worker
+ignored_services: []
+
+# When true, an alert is only sent if at least one service has
+# a changed container image (tag or digest).
+require_image_drift: false
