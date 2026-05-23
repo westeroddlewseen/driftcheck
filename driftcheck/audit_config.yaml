@@ -1,0 +1,14 @@
+# Audit log configuration for driftcheck
+audit:
+  # Path to the append-only JSONL audit log file.
+  # Supports environment-variable substitution via os.path.expandvars.
+  path: "${DRIFTCHECK_AUDIT_LOG_PATH:-/var/log/driftcheck/audit.jsonl}"
+
+  # When true the pipeline writes an AuditEntry for every service
+  # regardless of whether drift was detected.
+  log_clean_runs: true
+
+  # Maximum number of entries returned by read_all() before the log
+  # is considered too large and should be rotated externally.
+  # Set to 0 to disable the warning.
+  warn_above_entries: 10000
